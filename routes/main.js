@@ -19,6 +19,8 @@ router.post('/add-habit', habitControllers.createHabit);
 
 router.delete('/delete-habit/:habitId', habitControllers.deleteHabit);
 
+router.patch('/update-habit/:habitId', habitControllers.updateHabit);
+
 // router.post('/fetch-user', authControllers.fetchUser);
 
 

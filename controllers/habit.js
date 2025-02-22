@@ -93,3 +93,25 @@ exports.deleteHabit = async (req, res, next) => {
 
   return res.status(200).json({ message: 'Habit and its references deleted successfully', habit: deletedHabit });
 };
+
+exports.updateHabit = async (req, res, next) => {
+  if (!req.isAuth) {
+    return res.status(403).json({ message: 'Not Authorized' });
+  }
+
+  const { habitId } = req.params;
+
+  if (!habitId) {
+    return res.status(400).json({ message: 'LOG[updateHabit]: Failed to update habit - INVALID HABIT ID' });
+  }
+
+  const habitData = req.body;
+  
+  const updatedHabit = await Habit.findByIdAndUpdate(habitId, habitData);
+
+  if (!updatedHabit) {
+    return res.status(404).json({ message: 'Habit not found' });
+  }
+
+  return res.status(200).json({ message: 'Habit updated successfully', habit: updatedHabit });
+};
