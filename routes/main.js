@@ -15,9 +15,11 @@ router.post('/login', authControllers.login);
 
 router.post('/fetch-habits', habitControllers.fetchHabits);
 
-// router.post('/fetch-user', authControllers.fetchUser);
+router.post('/add-habit', habitControllers.createHabit);
 
-// router.post('/fetch-all-users', authControllers.fetchAllUsers);
+router.delete('/delete-habit/:habitId', habitControllers.deleteHabit);
+
+// router.post('/fetch-user', authControllers.fetchUser);
 
 
 module.exports = router;

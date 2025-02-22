@@ -3,8 +3,7 @@ const Schema = mongoose.Schema;
 
 const habitSubSchema = new Schema(
   {
-    habitId: { type: mongoose.Types.ObjectId, required: true },
-    userId: { type: mongoose.Types.ObjectId, required: true },
+    habitId: { type: mongoose.Schema.Types.ObjectId, ref: 'Habit', required: true },
   },
   { _id: false }
 );
