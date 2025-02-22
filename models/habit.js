@@ -6,8 +6,8 @@ const habitSchema = new Schema({
 
 	name: { type: String, required: true },
 	description: { type: String, required: true },
-	hour: { type: Number, required: true },
-	minute: { type: Number, required: true },
+	hour: { type: String, required: true },
+	minute: { type: String, required: true },
 	completed: { type: Boolean, default: false },
 
 	createdAt: { type: Date, default: Date.now },
