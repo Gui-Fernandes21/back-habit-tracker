@@ -106,8 +106,8 @@ exports.updateHabit = async (req, res, next) => {
   }
 
   const habitData = req.body;
-  
-  const updatedHabit = await Habit.findByIdAndUpdate(habitId, habitData);
+
+  const updatedHabit = await Habit.findByIdAndUpdate(habitId, habitData, { returnDocument: 'after' });
 
   if (!updatedHabit) {
     return res.status(404).json({ message: 'Habit not found' });

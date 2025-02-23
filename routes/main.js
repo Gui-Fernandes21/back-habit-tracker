@@ -13,7 +13,7 @@ router.post('/signup', authControllers.signup);
 
 router.post('/login', authControllers.login);
 
-router.post('/fetch-habits', habitControllers.fetchHabits);
+router.get('/fetch-habits', habitControllers.fetchHabits);
 
 router.post('/add-habit', habitControllers.createHabit);
 
