@@ -25,7 +25,6 @@ const clientOptions = {
 async function run() {
 	try {
     console.log("Connecting to the database...");
-		// Create a Mongoose client with a MongoClientOptions object to set the Stable API version
 		await mongoose.connect(uri, clientOptions);
 		await mongoose.connection.db.admin().command({ ping: 1 });
 		console.log("Connected to the database successfully");
@@ -36,8 +35,8 @@ async function run() {
  
 run()
 	.then(() => {
-		app.listen(3030, () => {
-			console.log("Server is running on port 3030");
+		app.listen(process.env.PORT || 8080, () => {
+			console.log(`Server is running on port ${process.env.PORT || 8080}`);
 		});
 	})
 	.catch((err) => {

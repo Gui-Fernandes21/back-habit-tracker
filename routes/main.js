@@ -23,5 +23,4 @@ router.patch('/update-habit/:habitId', habitControllers.updateHabit);
 
 // router.post('/fetch-user', authControllers.fetchUser);
 
-
 module.exports = router;
