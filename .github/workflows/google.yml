@@ -31,13 +31,13 @@ jobs:
       #    or Artifact Registry. Adjust the registry URL as needed.
       - name: Build and push image
         run: |
-          gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/back-habit-tracker/htk-api:latest
+          gcloud builds submit --tag us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/back-habit-tracker/htk-api:latest
 
       # 6) Deploy to Cloud Run
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy htk-api \
-            --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/back-habit-tracker/htk-api:latest \
+            --image us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/back-habit-tracker/htk-api:latest \
             --region us-central1 \
             --platform managed \
             --allow-unauthenticated
