@@ -1,0 +1,37 @@
+name: CI/CD to Cloud Run
+
+on:
+  push:
+    branches: [ "main" ]
+  # or specify whichever branches or events trigger deployment
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1) Check out your repository code
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      # 2) Set up Google Cloud SDK
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      # 3) Build & push Docker image to Google Container Registry (GCR)
+      #    or Artifact Registry. Adjust the registry URL as needed.
+      - name: Build and push image
+        run: |
+          gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/back-habit-tracker/htk-api:latest
+
+      # 4) Deploy to Cloud Run
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy htk-api \
+            --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/back-habit-tracker/htk-api:latest \
+            --region us-central1 \
+            --platform managed \
+            --allow-unauthenticated
