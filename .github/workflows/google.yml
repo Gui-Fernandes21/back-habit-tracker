@@ -14,20 +14,26 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
 
-      # 2) Set up Google Cloud SDK
+        # 3) Authenticate to Google Cloud
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }} 
+
+      # 4) Set up Google Cloud SDK
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
           project_id: ${{ secrets.GCP_PROJECT_ID }}
+          install_components: cloud-build
 
-      # 3) Build & push Docker image to Google Container Registry (GCR)
+      # 5) Build & push Docker image to Google Container Registry (GCR)
       #    or Artifact Registry. Adjust the registry URL as needed.
       - name: Build and push image
         run: |
           gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/back-habit-tracker/htk-api:latest
 
-      # 4) Deploy to Cloud Run
+      # 6) Deploy to Cloud Run
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy htk-api \
