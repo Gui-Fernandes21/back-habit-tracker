@@ -28,7 +28,7 @@ jobs:
           install_components: gcloud
 
       # 5) Build & push Docker image to Google Container Registry (GCR)
-      #    or Artifact Registry. Adjust the registry URL as needed.
+      #    or Artifact Registry. Adjust the registry URL as needed. 
       - name: Build and push image
         run: |
           gcloud builds submit --tag us-central1-docker.pkg.dev/habit-tracker-451821/back-habit-tracker/htk-api:latest
