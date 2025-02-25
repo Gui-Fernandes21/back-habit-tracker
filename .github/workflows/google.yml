@@ -16,7 +16,7 @@ jobs:
 
         # 3) Authenticate to Google Cloud
       - name: Authenticate to GCP
-        uses: google-github-actions/auth@v1
+        uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }} 
 
@@ -25,7 +25,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-          install_components: gcloud beta
+          install_components: gcloud
 
       # 5) Build & push Docker image to Google Container Registry (GCR)
       #    or Artifact Registry. Adjust the registry URL as needed.
