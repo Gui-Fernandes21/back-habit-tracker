@@ -1,6 +1,6 @@
 const User = require("../models/user.js");
 
-exports.fetchUser = async (req, res, next) => {
+exports.getUserProfile = async (req, res, next) => {
 	if (!req.isAuth) {
 		return res.status(403).json({ message: "Not Authorized" });
 	}
