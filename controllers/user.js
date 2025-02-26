@@ -11,7 +11,7 @@ exports.fetchUser = async (req, res, next) => {
 		return res.status(400).json({ message: "No user found" });
 	}
 	try {
-		const user = await User.findById(userId);
+		const user = await User.findById(userId).select(['email', 'name', 'profilePicture']);
 
 		if (!user) {
 			throw new Error("Failed to Fetch");
