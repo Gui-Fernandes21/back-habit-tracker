@@ -24,6 +24,12 @@ router.get('/fetch-habits', habitControllers.fetchHabits);
 
 router.post('/add-habit', habitControllers.createHabit);
 
+// TODO - ADD A CONFIRM HABIT ROUTE
+router.post('/confirm-habit/:habitId', habitControllers.confirmHabit);
+
+// TODO - ADD A SKIP HABIT ROUTE
+router.post('/skip-habit/:habitId', habitControllers.skipHabit);
+
 router.delete('/delete-habit/:habitId', habitControllers.deleteHabit);
 
 router.patch('/update-habit/:habitId', habitControllers.updateHabit);

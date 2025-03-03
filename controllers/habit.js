@@ -115,3 +115,7 @@ exports.updateHabit = async (req, res, next) => {
 
   return res.status(200).json({ message: 'Habit updated successfully', habit: updatedHabit });
 };
+
+exports.confirmHabit = async (req, res, next) => {};
+
+exports.skipHabit = async (req, res, next) => {};

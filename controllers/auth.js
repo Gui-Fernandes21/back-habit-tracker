@@ -27,6 +27,7 @@ exports.signup = async (req, res, next) => {
 			name: name,
 			email: email,
 			password: hashPassword,
+			profilePicture: "default.jpg",
 			habits: [],
 		});
 

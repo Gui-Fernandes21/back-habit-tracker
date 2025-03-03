@@ -23,6 +23,7 @@ const userSchema = new Schema({
   },
   profilePicture: {
     type: String,
+    default: 'default.jpg',
   },
   createdAt: {
     type: Date,
