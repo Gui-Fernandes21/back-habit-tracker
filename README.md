@@ -76,19 +76,26 @@ npm start
 
 ---
 
-## API Endpoints (Optional)
+## API Endpoints
 
 > If your backend has REST endpoints or GraphQL queries, document them here.
 
 **Example**:
 
-| Method | Endpoint         | Description               |
-|--------|------------------|---------------------------|
-| GET    | `/api/users`     | Retrieve all users       |
-| POST   | `/api/users`     | Create a new user        |
-| GET    | `/api/users/:id` | Retrieve a user by ID    |
-| PUT    | `/api/users/:id` | Update a user            |
-| DELETE | `/api/users/:id` | Delete a user            |
+| Method | Endpoint                  | Description                       |
+|--------|---------------------------|-----------------------------------|
+| GET    | `/fetch-habits`           | Retrieve Habits for logged in user|
+| GET    | `/user-profile`           | Retrieve profile of logged in user|
+| POST   | `/signup`                 | Create a new user and signs in    |
+| POST   | `/login`                  | Authenticates user returns a token|
+| POST   | `/add-habit`              | Create a new habit                |
+| POST   | `/confirm-habit/:habitId` | Confirms a Habit                  |
+| POST   | `/skip-habit/:habitId`    | Skips a Habit                     |
+| POST   | `/upload-profile-picture` | Uploads a profile picture         |
+| PATCH  | `/update-habit/:habitId`  | Update a habit detail             |
+| PATCH  | `/update-user-details`    | Update a user profile details     |
+| PATCH  | `/update-password`        | Update a user password            |
+| DELETE | `/delete-profile-picture` | Delete a user profile picture     |
 
 ---
 
