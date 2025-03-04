@@ -49,24 +49,6 @@ DB_USERNAME=yourMongoDBUsername
 DB_PASSWORD=yourMongoDBPassword
 ```
 
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. Ensure you have **MongoDB** running locally or have credentials for a remote MongoDB instance.
-
----
-
-## Environment Variables
-
-Create a file named **`.env`** in the project root. It **must** include the following variables:
-
-```bash
-DB_USERNAME=yourMongoDBUsername
-DB_PASSWORD=yourMongoDBPassword
-```
-
 > You can also add any other variables your application needs (e.g., `PORT=3000`, `JWT_SECRET=someSecret`), but be sure **not** to commit your `.env` file to version control.
 
 ---
