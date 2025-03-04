@@ -1,4 +1,5 @@
 const User = require("../models/user.js");
+const bcrypt = require("bcrypt");
 
 exports.getUserProfile = async (req, res, next) => {
 	if (!req.isAuth) {
@@ -16,10 +17,6 @@ exports.getUserProfile = async (req, res, next) => {
 			"name",
 			"profilePicture",
 		]);
-
-		if (!user) {
-			throw new Error("Failed to Fetch");
-		}
 
 		res.status(200).json({ user: user });
 	} catch (err) {
@@ -94,8 +91,6 @@ exports.updateUserDetails = async (req, res) => {
 	res.status(200).json({ message: "User details updated successfully", user });
 };
 
-// TODO - Integrate bcrypt to hash the password before saving it
-// TODO - Add validation to check if the new password is the same as the old password with bcrypt
 exports.updatePassword = async (req, res) => {
 	if (!req.isAuth) {
 		return res.status(403).json({ message: "Not Authorized" });
@@ -119,15 +114,17 @@ exports.updatePassword = async (req, res) => {
 		return res.status(400).json({ message: "Invalid password data" });
 	}
 
-	const isMatch = await user.comparePasswords(currentPassword);
-
+	const isMatch = await bcrypt.compare(currentPassword, user.password);
+    
 	if (!isMatch) {
-		return res.status(400).json({ message: "Invalid password" });
+    return res.status(400).json({ message: "Current Password does not match the actual current password." });
 	}
 
-	user.password = newPassword;
+  const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+  
+	user.password = hashedNewPassword;
 
 	await user.save();
 
-	res.status(200).json({ message: "Password updated successfully", user });
+	res.status(200).json({ message: "Password updated successfully" });
 };

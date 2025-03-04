@@ -80,7 +80,7 @@ exports.login = async (req, res, next) => {
 			});
 			console.log("Incorrect Password");
 		}
-    
+
 		const token = await jwt.sign(
 			{
 				email: user.email,
@@ -92,7 +92,6 @@ exports.login = async (req, res, next) => {
 
 		res.status(200).json({
 			token: token,
-			user: user,
 		});
 	} catch (err) {
 		res.status(500);
