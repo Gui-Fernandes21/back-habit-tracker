@@ -55,6 +55,30 @@ exports.uploadProfilePicture = async (req, res) => {
 	res.status(200).json({ message: "Profile picture uploaded successfully" });
 };
 
+exports.deleteProfilePicture = async (req, res) => {
+  if (!req.isAuth) {
+    return res.status(403).json({ message: "Not Authorized" });
+  }
+
+  const userId = req.userId;
+
+  if (!userId) {
+    return res.status(400).json({ message: "No user found" });
+  }
+
+  const user = await User.findById(userId);
+
+  if (!user) {
+    return res.status(404).json({ message: "No user found" });
+  }
+
+  user.profilePicture = "";
+
+  await user.save();
+
+  res.status(200).json({ message: "Profile picture deleted successfully" });
+};
+
 exports.updateUserDetails = async (req, res) => {
 	if (!req.isAuth) {
 		return res.status(403).json({ message: "Not Authorized" });
