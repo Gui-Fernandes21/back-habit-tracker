@@ -8,7 +8,11 @@ const habitSchema = new Schema({
 	description: { type: String, required: true },
 	hour: { type: String, required: true },
 	minute: { type: String, required: true },
-	completed: { type: Boolean, default: false },
+	status: {
+		type: String,
+		enum: ["TODO", "DONE", "SKIP"],
+		default: "TODO",
+	},
 
 	createdAt: { type: Date, default: Date.now },
 	updatedAt: { type: Date, default: Date.now },

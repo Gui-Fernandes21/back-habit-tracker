@@ -37,4 +37,14 @@ const userSchema = new Schema({
   habits: [habitSubSchema],
 });
 
+userSchema.pre('save', function (next) {
+  this.updatedAt = Date.now();
+  next();
+});
+
+userSchema.pre('findOneAndUpdate', function (next) {
+  this.set({ updatedAt: Date.now() });
+  next();
+});
+
 module.exports = mongoose.model('User', userSchema);
