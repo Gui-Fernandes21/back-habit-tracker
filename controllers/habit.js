@@ -21,11 +21,30 @@ exports.fetchHabits = async (req, res) => {
     return res.status(404).json({ message: 'No user found' });
   }
 
-  const { filter } = req.params;
+  const { filter } = req.query;
 
-  const filterCriteria = filter ? { userId: user._id, status: filter } : { userId: user._id };
+  const filterCriteria = filter && filter !== "ALL" ? { userId: user._id, status: filter } : { userId: user._id };
 
-  const habits = await Habit.find(filterCriteria).select().sort('hour minute');
+  const habits = await Habit.find(filterCriteria).select();
+
+  const statusOrder = {
+    TODO: 0,
+    SKIP: 1,
+    DONE: 2
+  };
+  
+  habits.sort((a, b) => {
+    // 1. Compare by status first
+    if (statusOrder[a.status] !== statusOrder[b.status]) {
+      return statusOrder[a.status] - statusOrder[b.status];
+    }
+    // 2. If status is the same, compare by hour
+    if (a.hour !== b.hour) {
+      return a.hour - b.hour;
+    }
+    // 3. If hour is the same, compare by minute
+    return a.minute - b.minute;
+  });
 
   return res.status(200).json({ habits, message: 'Habits fetched successfully' });
 };
