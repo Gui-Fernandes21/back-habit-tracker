@@ -13,6 +13,9 @@ const habitSchema = new Schema({
 		enum: ["TODO", "DONE", "SKIP"],
 		default: "TODO",
 	},
+	goal: { type: Number, required: true },
+	repeat: { type: String, required: true },
+	startDate: { type: Date, default: Date.now },
 
 	createdAt: { type: Date, default: Date.now },
 	updatedAt: { type: Date, default: Date.now },
