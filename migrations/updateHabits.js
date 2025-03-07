@@ -27,22 +27,16 @@ const updateHabitsSchema = async () => {
 			console.log(`Server is running on port ${process.env.PORT || 8080}`);
 		});
 
-		const defaultGoal = 1;
-		const defaultRepeat = "Daily";
 		const defaultStartDate = new Date();
 
 		const result = await Habit.updateMany(
 			{
 				$or: [
-					{ goal: { $exists: false } },
-					{ repeat: { $exists: false } },
 					{ startDate: { $exists: false } },
 				],
 			},
 			{
 				$set: {
-					goal: defaultGoal,
-					repeat: defaultRepeat,
 					startDate: defaultStartDate,
 				},
 			}
