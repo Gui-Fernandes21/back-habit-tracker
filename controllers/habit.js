@@ -66,13 +66,14 @@ exports.createHabit = async (req, res) => {
     return res.status(404).json({ message: 'No user found' });
   }
 
-  const { name, description, hour, minute } = req.body;
+  console.log(req.body);
+  const { name, description, hour, minute, startDate } = req.body;
 
-  if (!name || !description || !hour || !minute) {
+  if (!name || !description || !hour || !minute || !startDate) {
     return res.status(400).json({ message: 'LOG[createHabit]: Failed to create habit - INVALID HABIT DATA' });
   }
   
-  const habit = new Habit({ userId: user._id, name, description, hour, minute, status: 'TODO' });
+  const habit = new Habit({ userId: user._id, name, description, hour, minute, status: 'TODO', startDate });
   
   const savedHabit = await habit.save();
 
